@@ -48,7 +48,7 @@ The following requirements were met:
 - Edit existing product (edited in database too) ✔️
 - Remove an existing product (removed in database too) ✔️
 - Logout button that redirects to login page ✔️ (note: I have added a feature where the user is first direct to a thank you/signout page, then after 3 seconds will be redirected to signin) 
-- Make the page responsibe for mobile and devices ❌
+- Make the page responsive for mobile and devices ❌
 
 
 
