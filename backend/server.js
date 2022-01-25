@@ -6,6 +6,7 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
+require("dotenv").config();
 
 const PORT = process.env.PORT || 5001;
 
@@ -17,11 +18,8 @@ app.use(express.urlencoded({ extended: false }));
 //                      Database
 // ======================================================
 const connectToDatabase = require("./models/Database");
-const mongoURI =
-  "mongodb+srv://Alex:xTDYpk5QhUfAPipe@cluster0.htugk.mongodb.net/test" ||
-  process.env.MONGO_URI;
-
-//xTDYpk5QhUfAPipe
+const mongoURI = process.env.MONGO_URI;
+// Please use your own Mongo DB Atlas Connection
 
 connectToDatabase(mongoURI);
 
