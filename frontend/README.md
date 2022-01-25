@@ -9,6 +9,7 @@
 - React-router-dom
 - Reduxjs/toolkit
 - Tailwind CSS
+- Axios
   npm i redux react-redux react-router-dom reduxjs/toolkit
   npm install @reduxjs/toolkit
 
@@ -28,3 +29,4 @@ https://tailwindcss.com/docs/guides/create-react-app
 - Express-router
 - Nodemon
 - Bcrypt
+- Mongoose
