@@ -16,6 +16,8 @@ const ModifyItems = () => {
 
   const dispatch = useDispatch();
 
+  // We set this useEffect so that if a user only wants to modify one field the rest won't be empty in the form
+  // We need the original SKU to find and update in the DB
   useEffect(() => {
     dispatch(modifyItemsSliceActions.setModifiedTitle(title));
     dispatch(modifyItemsSliceActions.setModifiedSku(sku));

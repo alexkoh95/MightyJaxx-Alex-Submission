@@ -1,13 +1,17 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signinActions } from "../../slices/Signup-Login/Signin-Slice";
+import {
+  signinActions,
+  userSignin,
+} from "../../slices/Signup-Login/Signin-Slice";
 
 const Signin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const state = useSelector((state) => state.signin);
+  const signinBodyInfo = { email: state.email, password: state.password };
 
   const handleEmailChange = (event) => {
     dispatch(signinActions.setEmailAddress(event.target.value));
@@ -19,6 +23,7 @@ const Signin = () => {
 
   const handleSigninSubmitButton = async (event) => {
     event.preventDefault();
+    dispatch(userSignin(signinBodyInfo));
     const body = { email: state.email, password: state.password };
     const getLogin = await fetch("http://localhost:5001/signin", {
       method: "POST",
@@ -38,7 +43,6 @@ const Signin = () => {
   };
 
   const displayIncorrectInformationErrorMessage = () => {
-    console.log(state.incorrectUserInformation);
     if (state.incorrectUserInformation === true) {
       return (
         <div className="text-red-500">

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   email: "",
@@ -6,6 +6,19 @@ const initialState = {
   signedin: false,
   incorrectUserInformation: false,
 };
+
+export const userSignin = createAsyncThunk("user/signin", async (state) => {
+  const body = { email: state.email, password: state.password };
+  const getLogin = await fetch("http://localhost:5001/signin", {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await getLogin.json();
+  return data;
+});
 
 export const signinSlice = createSlice({
   name: "Signin",

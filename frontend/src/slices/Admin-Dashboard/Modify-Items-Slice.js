@@ -43,8 +43,3 @@ export const modifyItemsSlice = createSlice({
 export const modifyItemsSliceActions = modifyItemsSlice.actions;
 
 export default modifyItemsSlice.reducer;
-
-// // this exports signinActions to be used in the React Components
-// export const signinActions = signinSlice.actions;
-
-// export default signinSlice.reducer;

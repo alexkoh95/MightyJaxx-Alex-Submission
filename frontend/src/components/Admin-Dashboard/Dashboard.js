@@ -2,27 +2,18 @@ import React, { useEffect } from "react";
 import SideNavBar from "../Navbar/Side-Navbar";
 
 import { useSelector, useDispatch } from "react-redux";
-import { dashboardSliceActions } from "../../slices/Admin-Dashboard/Dashboard-Slice";
+import {
+  dashboardSliceActions,
+  loadAllData,
+} from "../../slices/Admin-Dashboard/Dashboard-Slice";
 import ItemDisplay from "./Item-Display";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.dashboard);
 
-  const loadAllData = async () => {
-    try {
-      const response = await fetch("http://localhost:5001/dashboard");
-      const itemsData = await response.json();
-      dispatch(dashboardSliceActions.setItemsDatabase(itemsData));
-      dispatch(dashboardSliceActions.setLoadingOff());
-    } catch (error) {
-      console.log("There has been an error", error);
-    }
-  };
-
   useEffect(async () => {
-    loadAllData();
-    dispatch(dashboardSliceActions.setItemsDatabase());
+    dispatch(loadAllData());
   }, []);
 
   const mapOutItemData = () => {

@@ -1,23 +1,45 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   itemsDatabase: [],
   loading: true,
 };
 
+export const loadAllData = createAsyncThunk(
+  "dashboard/getAllItems",
+  async () => {
+    try {
+      const response = await fetch("http://localhost:5001/dashboard");
+      const itemsData = await response.json();
+      return itemsData;
+    } catch (error) {
+      console.log("There has been an error", error);
+    }
+  }
+);
+
 export const dashboardSlice = createSlice({
   name: "Dashbaord",
   initialState,
   reducers: {
-    setItemsDatabase(state, action) {
-      state.itemsDatabase = action.payload;
-    },
     setLoadingOn(state, action) {
       state.loading = true;
     },
-    setLoadingOff(state, action) {
-      state.loading = false;
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loadAllData.pending, (state, action) => {
+        state.status = "loading";
+        state.loading = true;
+      })
+      .addCase(loadAllData.fulfilled, (state, action) => {
+        state.status = "success";
+        state.loading = false;
+        state.itemsDatabase = action.payload;
+      })
+      .addCase(loadAllData.rejected, (state, action) => {
+        state.status = "failed";
+      });
   },
 });
 
